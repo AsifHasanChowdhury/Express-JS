@@ -1,10 +1,6 @@
 
 import  express from 'express'
 import  * as dbModule from './index.js'
-// import  * as AdminRouter from './adminRouter.cjs'
-
-const AdminRouter = require('./adminRouter.mjs')
-// const AdminRouter = Admin()
 
 
 const app = express()
@@ -28,7 +24,7 @@ app.get('/getNotesbyId' , async (req,res)=>{
 
 //json body Approach
 app.post('/getNotesbyId' , async (req,res)=>{
-    const id = req.body.key
+    const id = req.body.id
     const note = await dbModule.getDetailsbyId(id)
     res.send(note)
 })
@@ -39,11 +35,6 @@ app.post('/AddDetails' , async (req,res)=>{
     const note = await dbModule.AddInformation(req.body.title,req.body.content)
     res.send(note)
 })
-
-
-//Admin Router
-app.use('/Admin',AdminRouter)
-
 
 
 app.use((err, req, res, next) => {
